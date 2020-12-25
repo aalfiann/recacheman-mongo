@@ -3,25 +3,32 @@
 - Removed old libraries
 - Fixing all vulnerables
 - Up to date
-- Still no support for MongoDB v3
+- Support for MongoDB v2 only
 
-# cacheman-mongo
+# recacheman-mongo
 
-[![Build Status](https://travis-ci.org/cayasso/cacheman-mongo.png?branch=master)](https://travis-ci.org/cayasso/cacheman-mongo)
-[![NPM version](https://badge.fury.io/js/cacheman-mongo.png)](http://badge.fury.io/js/cacheman-mongo)
+[![NPM](https://nodei.co/npm/recacheman-mongo.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/recacheman-mongo/)  
+  
+[![npm version](https://img.shields.io/npm/v/recacheman-mongo.svg?style=flat-square)](https://www.npmjs.org/package/recacheman-mongo)
+[![Build Status](https://travis-ci.com/aalfiann/recacheman-mongo.svg?branch=master)](https://travis-ci.com/aalfiann/recacheman-mongo)
+[![Coverage Status](https://coveralls.io/repos/github/aalfiann/recacheman-mongo/badge.svg?branch=master)](https://coveralls.io/github/aalfiann/recacheman-mongo?branch=master)
+[![Known Vulnerabilities](https://snyk.io//test/github/aalfiann/recacheman-mongo/badge.svg?targetFile=package.json)](https://snyk.io//test/github/aalfiann/recacheman-mongo?targetFile=package.json)
+![License](https://img.shields.io/npm/l/recacheman-mongo)
+![NPM download/month](https://img.shields.io/npm/dm/recacheman-mongo.svg)
+![NPM download total](https://img.shields.io/npm/dt/recacheman-mongo.svg)  
 
-MongoDB standalone caching library for Node.JS and also cache engine for [cacheman](https://github.com/cayasso/cacheman).
+MongoDB standalone caching library for Node.JS and also cache engine for [recacheman](https://github.com/aalfiann/recacheman).
 
 ## Instalation
 
 ``` bash
-$ npm install cacheman-mongo
+$ npm install recacheman-mongo
 ```
 
 ## Usage
 
 ```javascript
-var CachemanMongo = require('cacheman-mongo');
+var CachemanMongo = require('recacheman-mongo');
 var cache = new CachemanMongo();
 
 // set the value
@@ -97,7 +104,7 @@ Thanks to @Jared314 for adding this [feature](https://github.com/cayasso/cachema
 
 ```javascript
 var cache = new Cache({ compression: true });
-cache.set('test1', new Buffer("something big"), function (err) {...});
+cache.set('test1', Buffer.from("something big"), function (err) {...});
 
 ```
 ### cache.set(key, value, [ttl, [fn]])

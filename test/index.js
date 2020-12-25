@@ -14,14 +14,11 @@ describe('cacheman-mongo', function () {
     done();
   });
 
-  // after(function(done){
-  //   cache.clear(function() {
-  //     cache.client.dropDatabase(done);
-  //   });
-  // });
-
   after(function(done){
-    cache.clear(done);
+    cache.clear(function() {
+      cache.client.dropDatabase();
+      done();
+    });
   });
 
   it('should have main methods', function () {
@@ -36,7 +33,7 @@ describe('cacheman-mongo', function () {
       if (err) return done(err);
       cache.get('test1', function (err, data) {
         if (err) return done(err);
-        assert.equal(data.a, 1);
+        assert.strictEqual(data.a, 1);
         done();
       });
     });
@@ -81,12 +78,12 @@ describe('cacheman-mongo', function () {
       if (err) return done(err);
       cache.get('test5', function (err, data) {
         if (err) return done(err);
-        assert.equal(data, value);
+        assert.strictEqual(data, value);
         cache.del('test5', function (err) {
           if (err) return done(err);
           cache.get('test5', function (err, data) {
             if (err) return done(err);
-            assert.equal(data, null);
+            assert.strictEqual(data, null);
             done();
           });
         });
@@ -100,12 +97,12 @@ describe('cacheman-mongo', function () {
       if (err) return done(err);
       cache.get('test6', function (err, data) {
         if (err) return done(err);
-        assert.equal(data, value);
+        assert.strictEqual(data, value);
         cache.clear(function (err) {
           if (err) return done(err);
           cache.get('test6', function (err, data) {
             if (err) return done(err);
-            assert.equal(data, null);
+            assert.strictEqual(data, null);
             done();
           });
         });
@@ -120,7 +117,7 @@ describe('cacheman-mongo', function () {
       setTimeout(function () {
         cache.get('test7', function (err, data) {
         if (err) return done(err);
-          assert.equal(data, null);
+          assert.strictEqual(data, null);
           done();
         });
       }, 1100);
@@ -133,7 +130,7 @@ describe('cacheman-mongo', function () {
       if (err) return done(err);
       cache.get('test8', function (err, data) {
         if (err) return done(err);
-        assert.equal(data.a, 1);
+        assert.strictEqual(data.a, 1);
         done();
       });
     });
@@ -147,7 +144,7 @@ describe('cacheman-mongo', function () {
         if (err) return done(err);
         cache.get('test9', function (err, data) {
           if (err) return done(err);
-          assert.equal(data.a, 1);
+          assert.strictEqual(data.a, 1);
           done();
         });
       });
@@ -162,7 +159,7 @@ describe('cacheman-mongo', function () {
         if (err) return done(err);
         cache.get('test9', function (err, data) {
           if (err) return done(err);
-          assert.equal(data.a, 1);
+          assert.strictEqual(data.a, 1);
           done();
         });
       });
@@ -202,11 +199,11 @@ describe('cacheman-mongo', function () {
     it('should store compressable item compressed', function (done) {
       let value = Date.now().toString();
 
-      cache.set('test1', new Buffer(value), function (err) {
+      cache.set('test1', Buffer.from(value), function (err) {
         if (err) return done(err);
         cache.get('test1', function (err, data) {
           if (err) return done(err);
-          assert.equal(data.toString(), value);
+          assert.strictEqual(data.toString(), value);
           done();
         });
       });
@@ -219,7 +216,7 @@ describe('cacheman-mongo', function () {
         if (err) return done(err);
         cache.get('test1', function (err, data) {
           if (err) return done(err);
-          assert.equal(data, value);
+          assert.strictEqual(data, value);
           done();
         });
       });
@@ -233,7 +230,7 @@ describe('cacheman-mongo', function () {
         if (err) return done(err);
         cache.get('test1', function (err, data) {
           if (err) return done(err);
-          assert.equal(md5(data), md5(value));
+          assert.strictEqual(md5(data), md5(value));
           done();
         });
       });

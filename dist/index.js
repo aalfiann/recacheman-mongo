@@ -75,7 +75,7 @@ var MongoStore = /*#__PURE__*/function () {
     this.compression = options.compression || false;
     this.ready = (0, _thunky["default"])(function (cb) {
       function createIndex(err, db) {
-        db.ensureIndex(coll, {
+        db.createIndex(coll, {
           expireAt: 1
         }, {
           expireAfterSeconds: 0
@@ -93,7 +93,7 @@ var MongoStore = /*#__PURE__*/function () {
         _mongodb.MongoClient.connect(conn, mongoOptions, function (err, db) {
           if (err) return cb(err);
           createIndex(null, _this.client = db);
-          db.ensureIndex(coll, {
+          db.createIndex(coll, {
             expireAt: 1
           }, {
             expireAfterSeconds: 0
@@ -259,6 +259,12 @@ var MongoStore = /*#__PURE__*/function () {
  * Non-exported Helpers
  */
 
+
+exports["default"] = MongoStore;
+
+function isBuffer(obj) {
+  return obj.constructor && obj.constructor.isBuffer && obj.constructor.isBuffer(obj);
+}
 /**
  * Compress data value.
  *
@@ -267,8 +273,6 @@ var MongoStore = /*#__PURE__*/function () {
  * @api public
  */
 
-
-exports["default"] = MongoStore;
 
 function compress(data, fn) {
   // Data is not of a "compressable" type (currently only Buffer)

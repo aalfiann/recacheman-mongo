@@ -35,7 +35,7 @@
     "nyc": "^15.1.0"
   },
   "dependencies": {
-    "mongodb": "^2.1.4",
+    "mongodb": "^2.2.36",
     "mongodb-uri": "^0.9.7",
     "thunky": "^0.1.0"
   }

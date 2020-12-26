@@ -1,6 +1,6 @@
 {
   "name": "recacheman-mongo",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "MongoDB standalone caching library for Node.JS and also cache engine for cacheman",
   "author": "Jonathan Brumley <cayasso@gmail.com>",
   "main": "./dist/index",
